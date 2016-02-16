@@ -1,0 +1,56 @@
+{% load staticfiles %}
+
+<html lang = "en">
+<head>
+    
+     <link rel="stylesheet" href="{% static 'stebbins/css/new_web_users.css' %}"/>
+     <link href='http://fonts.googleapis.com/css?family=Vollkorn:400,700' rel='stylesheet' type='text/css'>
+     
+    <title>Web Online Users</title>
+</head>
+
+<body>
+
+{% if request.user.is_authenticated %}
+    <span><a href="/accounts/loggedin"><div class="homeButton"></div></a></span>
+{% else %}
+    <span><a href="/stebbins"><div class="homeButton"></div></a></span>
+    <span style="float: right;"><a href= "/accounts/register" class="myButton">Register</a></span>
+    <span style="float: right;"><a href= "/accounts/login" class="myButton">Login</a></span>
+{% endif %}
+
+<h1 class="description">
+  Online Web Users.
+</h1>
+
+<div class="box-table">
+<table>
+  <thead>
+    <tr>
+    <th>Photo</th>
+      <th>Name</th>
+      <th>Ranking</th>
+      <th>Wins</th>
+      <th>losses</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for user in users%}
+    <tr>
+    <td class="user-photo">
+      <img class="user-tumb" src="{{MEDIA_URL}}{{avatar}}{{user.user.picture}}"></td>
+    <td class="styleFont">{{user.user.userName}}</td>
+    <td class="styleFont">{{user.user.ranking}}</td>
+    <td class="styleFont">{{user.user.wins}}</td>
+    <td class="styleFont">{{user.user.losses}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  </table>    
+</div>
+
+
+
+</body>
+</html>
+
